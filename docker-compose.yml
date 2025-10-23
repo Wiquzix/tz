@@ -1,0 +1,50 @@
+version: '3.8'
+
+services: 
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    container_name: backend
+    environment:
+      - POSTGRES_SERVER=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      # для SQLAlchemy и Alembic
+      - SQLALCHEMY_DATABASE_URI=postgresql+asyncpg://postgres:postgres@db:5432/postgres
+    volumes:
+      - .:/app
+    depends_on: 
+      db:
+        condition: service_healthy
+    restart: on-failure
+    healthcheck:
+      # Simple exec-form curl check (may produce normal curl output in logs).
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 86400s
+      timeout: 10s
+      retries: 1
+      start_period: 1s
+
+  db:  
+    image: postgres:15 
+    container_name: db
+    environment:
+      POSTGRES_USER: postgres     
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:  
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

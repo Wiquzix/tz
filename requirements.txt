@@ -1,0 +1,7 @@
+fastapi==0.119.1
+pydantic==2.12.3
+python-dotenv==1.1.1
+SQLAlchemy==2.0.44
+uvicorn==0.27.1
+asyncpg==0.29.0
+alembic==1.13.1

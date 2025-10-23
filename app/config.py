@@ -1,0 +1,14 @@
+
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
+
+DATABASE_URI = os.getenv("DATABASE_URL")
+POSTGRES_SERVER = os.getenv("POSTGRES_SERVER")
+POSTGRES_USER= os.getenv("POSTGRES_USER")
+POSTGRES_PASSWORD= os.getenv("POSTGRES_PASSWORD")
+POSTGRES_DB= os.getenv("POSTGRES_DB")
+
+SQLALCHEMY_DATABASE_URI = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}/{POSTGRES_DB}"
