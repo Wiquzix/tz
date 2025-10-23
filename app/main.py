@@ -29,9 +29,3 @@ app.include_router(orders.router,
                    tags=['orders']
                    )
                    
-
-
-@app.get("/health", status_code=200)
-async def health():
-    return {"status": "ok"}
-

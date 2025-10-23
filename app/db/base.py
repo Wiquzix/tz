@@ -14,8 +14,8 @@ AsyncSessionLocal = sessionmaker(
     engine,
     class_=AsyncSession,
     expire_on_commit=False,
-    autocommit=False,  # Оставляем False для управления транзакциями
-    autoflush=True,    # Автоматический flush изменений
+    autocommit=False, 
+    autoflush=True,  
 )
 
 

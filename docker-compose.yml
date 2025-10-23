@@ -22,7 +22,6 @@ services:
         condition: service_healthy
     restart: on-failure
     healthcheck:
-      # Simple exec-form curl check (may produce normal curl output in logs).
       test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
       interval: 86400s
       timeout: 10s

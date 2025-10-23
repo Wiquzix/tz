@@ -3,8 +3,6 @@ from logging.config import fileConfig
 import os
 import sys
 
-# Ensure project root is on sys.path so alembic can import `app` when run from
-# the repository root or CI. This makes `PYTHONPATH=.` unnecessary in most cases.
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
